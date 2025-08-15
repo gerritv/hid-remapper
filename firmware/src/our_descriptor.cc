@@ -300,7 +300,7 @@ const uint8_t our_report_descriptor_horipad[] = {
     0x09, 0x31,        //   Usage (Y)
     0x09, 0x32,        //   Usage (Z)
     0x09, 0x35,        //   Usage (Rz)
-    0x75, 0x08,        //   Report Size (8)
+    0x75, 0x10,        //   Report Size (8) GVGV (16) 
     0x95, 0x04,        //   Report Count (4)
     0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0x75, 0x08,        //   Report Size (8)
