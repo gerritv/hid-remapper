@@ -295,7 +295,7 @@ const uint8_t our_report_descriptor_horipad[] = {
     0x95, 0x01,        //   Report Count (1)
     0x81, 0x01,        //   Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0x26, 0xFF, 0x03,  //   Logical Maximum (255) GVGV 1023
-    0x46, 0xFF, 0x00,  //   Physical Maximum (255)
+    0x46, 0xFF, 0x03,  //   Physical Maximum (255) GVGV 1023
     0x09, 0x30,        //   Usage (X)
     0x09, 0x31,        //   Usage (Y)
     0x09, 0x32,        //   Usage (Z)
