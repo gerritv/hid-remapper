@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Remapper Firmware",
+			"path": "/home/gerritv/hid-remapper/firmware"
+		}
+	],
+	"remoteAuthority": "wsl+ubuntu-24.04",
+    "settings": {
+      "remote.WSL.fileWatcher.polling": true
+  }
+
+}
