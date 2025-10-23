@@ -269,7 +269,8 @@ const uint8_t our_report_descriptor_absolute[] = {
 
 const uint8_t our_report_descriptor_horipad[] = {
     0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
-    0x09, 0x05,        // Usage (Game Pad)
+    //0x09, 0x05,        // Usage (Game Pad)
+    0x09, 0x08,        // Usage (Multi Axis
     0xA1, 0x01,        // Collection (Application)
     0x15, 0x00,        //   Logical Minimum (0)
     0x25, 0x01,        //   Logical Maximum (1)
@@ -294,18 +295,27 @@ const uint8_t our_report_descriptor_horipad[] = {
     0x65, 0x00,        //   Unit (None)
     0x95, 0x01,        //   Report Count (1)
     0x81, 0x01,        //   Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
-    0x26, 0xFF, 0x00,  //   Logical Maximum (255)
-    0x46, 0xFF, 0x00,  //   Physical Maximum (255)
+    0x26, 0xFF, 0x03,  //   Logical Maximum (1023)
+    0x46, 0xFF, 0x03,  //   Physical Maximum (1023)
     0x09, 0x30,        //   Usage (X)
     0x09, 0x31,        //   Usage (Y)
     0x09, 0x32,        //   Usage (Z)
     0x09, 0x35,        //   Usage (Rz)
-    0x75, 0x08,        //   Report Size (8)
+    0x75, 0x0A,        //   Report Size (10)
     0x95, 0x04,        //   Report Count (4)
     0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0x75, 0x08,        //   Report Size (8)
     0x95, 0x01,        //   Report Count (1)
     0x81, 0x01,        //   Input (Const,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+   //  0x85, REPORT_ID_LEDS,      //   Report ID (REPORT_ID_LEDS)
+    0x05, 0x08,                //   Usage Page (LEDs)
+    0x95, 0x05,                //   Report Count (5)
+    0x19, 0x01,                //   Usage Minimum (Num Lock)
+    0x29, 0x05,                //   Usage Maximum (Kana)
+    0x91, 0x02,                //   Output (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
+    0x95, 0x01,                //   Report Count (1)
+    0x75, 0x03,                //   Report Size (3)
+    0x91, 0x03,                //   Output (Const,Var,Abs,No Wrap,Linear,Preferred State,No Null Position,Non-volatile)
     0xC0,              // End Collection
 };
 
@@ -546,7 +556,11 @@ static const uint8_t horipad_neutral[] = { 0x00, 0x00, 0x0F, 0x80, 0x80, 0x80, 0
 void horipad_clear_report(uint8_t* report, uint8_t report_id, uint16_t len) {
     memcpy(report, horipad_neutral, sizeof(horipad_neutral));
 }
-
+void horipad_handle_set_report(uint8_t report_id, const uint8_t* buffer, uint16_t reqlen) {
+    if  (report_id == report_id) { //REPORT_ID_LEDS) {
+        handle_received_report(buffer, reqlen, OUR_OUT_INTERFACE, report_id);
+    }
+}
 void ps4_clear_report(uint8_t* report, uint8_t report_id, uint16_t len) {
     memset(report, 0, len);
     report[0] = report[1] = report[2] = report[3] = 0x80;
@@ -632,9 +646,12 @@ const our_descriptor_def_t our_descriptors[] = {
         .idx = 2,
         .descriptor = our_report_descriptor_horipad,
         .descriptor_length = sizeof(our_report_descriptor_horipad),
-        .vid = 0x0F0D,
-        .pid = 0x00C1,
+        //.vid = 0x0F0D,
+        .vid = 0x1c40,  // EZprototypes
+        //
+        .pid = 0x04d9,  // generic hid device
         .handle_received_report = do_handle_received_report,
+        .handle_set_report = horipad_handle_set_report,
         .clear_report = horipad_clear_report,
         .default_value = horipad_default_value,
     },

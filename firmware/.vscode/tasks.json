@@ -4,11 +4,52 @@
     {
       "label": "Build Firmware (WSL)",
       "type": "shell",
-      "command": "cmake --build build --target remapper",
+      "command": "PICO_BOARD=remapper_v8 cmake --build build --target remapper",
       "options": {
-      "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": []
-    }
+    },
+  
+    {
+      "label": "Start OpenOCD (DAP42 RP2040)",
+      "type": "shell",
+      "command": "openocd.exe",
+      "args": [
+        "-f","interface/dap42.cfg",
+        "-f","target/rp2040.cfg",
+        "-d2"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+  "label": "Launch GDB (WSL1)",
+  "type": "shell",
+  "command": "wsl.exe",
+  "args": [
+    "gdb-multiarch",
+    "/home/gerritv/hid-remapper/firmware/build/remapper.elf"
+  ],
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": true,
+    "panel": "shared"
+  },
+  "problemMatcher": []
+}
   ]
 }

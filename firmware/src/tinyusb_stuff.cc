@@ -104,12 +104,14 @@ const uint8_t* configuration_descriptors[] = {
 
 char const* string_desc_arr[] = {
     (const char[]){ 0x09, 0x04 },  // 0: is supported language is English (0x0409)
-#ifdef PICO_RP2350
-    "RP2350",  // 1: Manufacturer
-#else
-    "RP2040",  // 1: Manufacturer
-#endif
-    "HID Remapper XXXX",  // 2: Product
+//#ifdef PICO_RP2350
+ //   "RP2350",  // 1: Manufacturer
+//#else
+//    "RP2040",  // 1: Manufacturer
+//#endif
+    //"HID Remapper XXXX",  // 2: Product
+    "FranksWorkshop",   // 1: Manufacturer
+    "Generic HID Device",   // 2:
 };
 
 // Invoked when received GET DEVICE DESCRIPTOR
@@ -173,12 +175,12 @@ uint16_t const* tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
             _desc_str[1 + i] = str[i];
         }
 
-        if (index == 2) {
+       /*  if (index == 2) {
             uint64_t unique_id = get_unique_id();
             for (uint8_t i = 0; i < 4; i++) {
                 _desc_str[1 + chr_count - 4 + i] = id_chars[(unique_id >> (15 - i * 5)) & 0x1F];
             }
-        }
+        } */
     }
 
     // first byte is length (including header), second byte is string type

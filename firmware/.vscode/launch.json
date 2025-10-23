@@ -1,20 +1,14 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug RP2040 (WSL)",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/build/remapper.elf",
-      "cwd": "${workspaceFolder}",
-      "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb-multiarch",
-      "miDebuggerServerAddress": "localhost:3333",
-      "stopAtEntry": false,
-      "externalConsole": false,
-      //"setupCommands": [
-        //{ "text": "monitor reset init" }
-      //],
-    }
-  ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug with OpenOCD (on Windows)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "external",
+            "executable": "${workspaceFolder}/build/remapper.elf",
+            "gdbPath": "/usr/bin/gdb-multiarch",
+            "gdbTarget": "localhost:3333",
+        }
+    ]
 }
