@@ -1,3 +1,5 @@
+WARNING: This branch contains a modified copy of HID-remapper for a specific use
+
 # HID Remapper
 
 _For user documentation please see the project's website at [remapper.org](https://www.remapper.org/)._
